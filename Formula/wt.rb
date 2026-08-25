@@ -4,8 +4,8 @@ class Wt < Formula
 
   desc "Git worktree helper for running several agents at once"
   homepage "https://github.com/ryanmoelter/cli-tools"
-  url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.1.tar.gz"
-  sha256 "a1943e00ce0ddb810112e2788d6b7d898fba07407b4786ed35644dac30e2a540"
+  url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.2.tar.gz"
+  sha256 "cbb2bb410ff0fe957c76f0366f242b63b0b79ee6677f5bc57f0d4bdbba968913"
   license "MIT"
 
   depends_on "git"
