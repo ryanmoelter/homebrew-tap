@@ -6,12 +6,17 @@ class Stack < Formula
   license "MIT"
 
   depends_on "git"
+  depends_on "python@3.14"
 
-  uses_from_macos "python", since: :catalina
+  # detected_python_shebang lives here; Formula only includes Utils::Shebang.
+  include Language::Python::Shebang
 
   def install
     libexec.install "src/stack"
     libexec.install "src/_common"
+    # Pin the interpreter: `#!/usr/bin/env python3` would take whatever is
+    # first on PATH, which is not necessarily the version this was tested on.
+    rewrite_shebang detected_python_shebang, libexec/"stack"
     (bin/"stack").write_env_script libexec/"stack", PATH: "#{HOMEBREW_PREFIX}/bin:$PATH"
   end
 
@@ -37,6 +42,10 @@ class Stack < Formula
     system(*git, "commit", "-q", "--allow-empty", "-m", "root")
 
     assert_match version.to_s, shell_output("#{bin}/stack --version")
+
+    # The shebang must point at the pinned Homebrew python, not /usr/bin/env.
+    shebang = (libexec/"stack").read(96)[/\A#![^\n]*/]
+    assert_match Formula["python@3.14"].opt_bin.to_s, shebang
 
     # A fresh repo tracks no stack: exits 1 with a hint.
     assert_match "no stacks tracked yet",

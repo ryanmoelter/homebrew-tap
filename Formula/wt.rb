@@ -6,12 +6,17 @@ class Wt < Formula
   license "MIT"
 
   depends_on "git"
+  depends_on "python@3.14"
 
-  uses_from_macos "python", since: :catalina
+  # detected_python_shebang lives here; Formula only includes Utils::Shebang.
+  include Language::Python::Shebang
 
   def install
     libexec.install "src/wt"
     libexec.install "src/_common"
+    # Pin the interpreter: `#!/usr/bin/env python3` would take whatever is
+    # first on PATH, which is not necessarily the version this was tested on.
+    rewrite_shebang detected_python_shebang, libexec/"wt"
     # gh/glab are found on PATH for PR status; a GUI-launched caller has none.
     (bin/"wt").write_env_script libexec/"wt", PATH: "#{HOMEBREW_PREFIX}/bin:$PATH"
   end
@@ -48,6 +53,10 @@ class Wt < Formula
            "commit", "-q", "--allow-empty", "-m", "root"
 
     assert_match version.to_s, shell_output("#{bin}/wt --version")
+
+    # The shebang must point at the pinned Homebrew python, not /usr/bin/env.
+    shebang = (libexec/"wt").read(96)[/\A#![^\n]*/]
+    assert_match Formula["python@3.14"].opt_bin.to_s, shebang
 
     require "json"
     out = JSON.parse(shell_output("#{bin}/wt list --json"))
