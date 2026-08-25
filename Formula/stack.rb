@@ -1,4 +1,7 @@
 class Stack < Formula
+  # detected_python_shebang lives here; Formula only includes Utils::Shebang.
+  include Language::Python::Shebang
+
   desc "Stacked-branch helper for a squash-merge PR/MR workflow"
   homepage "https://github.com/ryanmoelter/cli-tools"
   url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.1.tar.gz"
@@ -7,9 +10,6 @@ class Stack < Formula
 
   depends_on "git"
   depends_on "python@3.14"
-
-  # detected_python_shebang lives here; Formula only includes Utils::Shebang.
-  include Language::Python::Shebang
 
   def install
     libexec.install "src/stack"
@@ -45,7 +45,7 @@ class Stack < Formula
 
     # The shebang must point at the pinned Homebrew python, not /usr/bin/env.
     shebang = (libexec/"stack").read(96)[/\A#![^\n]*/]
-    assert_match Formula["python@3.14"].opt_bin.to_s, shebang
+    assert_match formula_opt_bin("python@3.14").to_s, shebang
 
     # A fresh repo tracks no stack: exits 1 with a hint.
     assert_match "no stacks tracked yet",

@@ -1,4 +1,7 @@
 class Wt < Formula
+  # detected_python_shebang lives here; Formula only includes Utils::Shebang.
+  include Language::Python::Shebang
+
   desc "Git worktree helper for running several agents at once"
   homepage "https://github.com/ryanmoelter/cli-tools"
   url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.1.tar.gz"
@@ -7,9 +10,6 @@ class Wt < Formula
 
   depends_on "git"
   depends_on "python@3.14"
-
-  # detected_python_shebang lives here; Formula only includes Utils::Shebang.
-  include Language::Python::Shebang
 
   def install
     libexec.install "src/wt"
@@ -56,7 +56,7 @@ class Wt < Formula
 
     # The shebang must point at the pinned Homebrew python, not /usr/bin/env.
     shebang = (libexec/"wt").read(96)[/\A#![^\n]*/]
-    assert_match Formula["python@3.14"].opt_bin.to_s, shebang
+    assert_match formula_opt_bin("python@3.14").to_s, shebang
 
     require "json"
     out = JSON.parse(shell_output("#{bin}/wt list --json"))
