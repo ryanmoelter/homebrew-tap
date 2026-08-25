@@ -47,7 +47,7 @@ class Stack < Formula
     # holds even if a stack.branchPrefix is set globally.
     system "git", "-C", testpath, "config", "stack.branchPrefix", "prefix/"
 
-    system "#{bin}/stack", "create", "feat-a"
+    system bin/"stack", "create", "feat-a"
 
     require "json"
     out = JSON.parse(shell_output("#{bin}/stack list --json"))
