@@ -1,8 +1,8 @@
 class Stack < Formula
   desc "Stacked-branch helper for a squash-merge PR/MR workflow"
   homepage "https://github.com/ryanmoelter/cli-tools"
-  url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "814eb6085f8b6b89d24d9e03ffe87c852029f1b8ab607ce711e128ffa53f0ed8"
+  url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "a1943e00ce0ddb810112e2788d6b7d898fba07407b4786ed35644dac30e2a540"
   license "MIT"
 
   depends_on "git"
