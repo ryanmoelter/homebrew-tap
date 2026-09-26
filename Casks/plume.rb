@@ -1,6 +1,6 @@
 cask "plume" do
-  version "0.12.0"
-  sha256 "cbcfff53f3eb812fd6059447b7b23604178c0c8c06475740bd9fae554bb400cd"
+  version "0.13.0"
+  sha256 "bc43fbdf95cbb1227633e6752b73c90fc524a103e185320a001d3f7da970c698"
 
   url "https://github.com/ryanmoelter/plume/releases/download/v#{version}/Plume-#{version}.dmg"
   name "Plume"
