@@ -6,7 +6,7 @@ class Stack < Formula
   homepage "https://github.com/ryanmoelter/cli-tools"
   url "https://github.com/ryanmoelter/cli-tools/archive/refs/tags/v0.1.2.tar.gz"
   sha256 "cbb2bb410ff0fe957c76f0366f242b63b0b79ee6677f5bc57f0d4bdbba968913"
-  license "MIT"
+  license "Apache-2.0"
 
   depends_on "git"
   depends_on "python@3.14"
