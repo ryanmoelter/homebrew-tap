@@ -15,6 +15,7 @@ cask "plume" do
   depends_on macos: :tahoe
 
   app "Plume.app"
+  binary "#{appdir}/Plume.app/Contents/Helpers/plume"
 
   uninstall launchctl: "com.ryanmoelter.Plume.SleepHelper",
             quit:      "com.ryanmoelter.Plume"
