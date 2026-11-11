@@ -1,6 +1,6 @@
 cask "plume" do
-  version "0.18.0"
-  sha256 "515e154779ae790bd768df3d386c44f196e26b4ba7882566566c145d1389d897"
+  version "0.19.0"
+  sha256 "ec75b67ee60834f11c87f29b2d1ea4b038dddd9d84c861becfbeb6bf9b66957c"
 
   url "https://github.com/ryanmoelter/plume/releases/download/v#{version}/Plume-#{version}.dmg"
   name "Plume"
@@ -11,6 +11,8 @@ cask "plume" do
     url :url
     strategy :github_latest
   end
+
+  auto_updates true
 
   depends_on macos: :tahoe
 
